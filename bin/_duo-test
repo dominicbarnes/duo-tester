@@ -4,37 +4,73 @@
  * Module dependencies.
  */
 
+var Command = require('commander').Command;
 var exists = require('fs').existsSync;
 var glob = require('glob').sync;
 var pkg = require('../package.json');
-var program = require('commander');
 var resolve = require('path').resolve;
 
 /**
  * Command Line Interface.
  */
 
-program
+var program = new Command('duo-test')
   .version(pkg.version)
   .option('-r, --root <dir>', 'set root directory', process.cwd())
   .option('-u, --use <plugin>', 'use transform plugin(s)', collect, []);
 
+/**
+ * Starts a web server to perform browser testing.
+ *
+ * @see ../lib/browser.js
+ */
+
 program
-  .command('phantomjs [files...]')
+  .command('browser [files...]')
+  .description('start a web server for performing browser tests')
   .action(function (files, options) {
-    var root = options.parent.root;
-    var entries = getEntries(files, root);
-    var plugins = getPlugins(options.parent.use, root);
-
-    var runner = require('../lib/phantom');
-
-    runner(entries, {
-      root: root,
-      plugins: plugins
-    });
+    run('browser', files, options);
   });
 
+
+/**
+ * Perform headless testing using mocha-phantomjs.
+ *
+ * @see ../lib/phantom.js
+ */
+
+program
+  .command('phantomjs [files...]')
+  .description('run headless tests using mocha-phantomjs')
+  .action(function (files, options) {
+    run('phantom', files, options);
+  });
+
+// parse the CLI arguments
 program.parse(process.argv);
+
+if (!program.args.length) program.help();
+
+
+/**
+ * Gathers the necessary arguments for, and then kicks off the specific test
+ * command.
+ *
+ * @param {Object} options
+ * @param {Function} runner
+ */
+
+function run(runner, files, options) {
+  var runner = require('../lib/' + runner);
+  var root = options.parent.root;
+  var entries = getEntries(files, root);
+  var plugins = getPlugins(options.parent.use, root);
+
+  runner(entries, {
+    root: root,
+    plugins: plugins
+  });
+}
 
 
 /**
