@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <link rel="stylesheet" type="text/css" href="/mocha.css">
+    {{#each css}}
+      <link rel="stylesheet" type="text/css" href="/build/{{this}}">
+    {{/each}}
+  </head>
+  <body>
+    <div id="mocha"></div>
+    {{{body}}}
+    <script src="/mocha.js"></script>
+    <script>
+      mocha.setup('bdd');
+    </script>
+    {{#each js}}
+      <script src="/build/{{this}}"></script>
+    {{/each}}
+    <script>
+      (window.mochaPhantomJS || mocha).run();
+    </script>
+  </body>
+</html>

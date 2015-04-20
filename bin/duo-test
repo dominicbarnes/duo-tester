@@ -1,0 +1,40 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var spawn = require('win-spawn');
+var resolve = require('path').resolve;
+
+/**
+ * Resolve.
+ */
+
+var args = process.argv.slice(2);
+
+/**
+ * Inject the _duo-test script.
+ */
+
+args.unshift(resolve(__dirname, '_duo-test'));
+
+/**
+ * Add the necessary node flag.
+ */
+
+if (!require('has-generators')) args.unshift('--harmony-generators');
+
+/**
+ * Spawn.
+ */
+
+var proc = spawn(process.execPath, args, { stdio: 'inherit' });
+
+/**
+ * Exit.
+ */
+
+proc.on('exit', function (code) {
+  process.exit(code);
+});

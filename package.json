@@ -1,0 +1,16 @@
+{
+  "name": "duo-test",
+  "version": "0.0.0",
+  "description": "Automated testing tool for developers using duo",
+  "repository": "dominicbarnes/duo-test",
+  "dependencies": {
+    "commander": "^2.8.0",
+    "duo-serve": "^0.11.0",
+    "glob": "^5.0.5",
+    "has-generators": "^1.0.1",
+    "mocha-phantomjs": "^3.5.3",
+    "phantomjs": "^1.9.16",
+    "win-spawn": "^2.0.0"
+  },
+  "devDependencies": {}
+}

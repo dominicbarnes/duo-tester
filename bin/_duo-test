@@ -1,0 +1,90 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var exists = require('fs').existsSync;
+var glob = require('glob').sync;
+var pkg = require('../package.json');
+var program = require('commander');
+var resolve = require('path').resolve;
+
+/**
+ * Command Line Interface.
+ */
+
+program
+  .version(pkg.version)
+  .option('-r, --root <dir>', 'set root directory', process.cwd())
+  .option('-u, --use <plugin>', 'use transform plugin(s)', collect, []);
+
+program
+  .command('phantomjs [files...]')
+  .action(function (files, options) {
+    var root = options.parent.root;
+    var entries = getEntries(files, root);
+    var plugins = getPlugins(options.parent.use, root);
+
+    var runner = require('../lib/phantom');
+
+    runner(entries, {
+      root: root,
+      plugins: plugins
+    });
+  });
+
+program.parse(process.argv);
+
+
+/**
+ * Retrieve the list of entry files to use. (defaults to `test/*.js` just like
+ * mocha)
+ *
+ * @param {Array:String} [input]
+ * @returns {Array:String}
+ */
+
+function getEntries(input, root) {
+  if (input.length) return input;
+  return glob('test/*.js', { cwd: root });
+}
+
+/**
+ * Retrieve an array of plugins from `--use`.
+ *
+ * @param {Array:String} input
+ * @return {Array:Function}
+ */
+
+function getPlugins(input, root) {
+  return input.map(function (plugin) {
+    try {
+      var local = resolve(root, plugin);
+      var npm = resolve(root, "node_modules", plugin);
+      var cwd = resolve(process.cwd(), "node_modules", plugin);
+      var mod;
+
+      if (exists(local)) mod = require(local);
+      else if (exists(local + '.js')) mod = require(local);
+      else if (exists(npm)) mod = require(npm);
+      else mod = require(cwd);
+
+      return Array.isArray(mod) ? mod : mod();
+    } catch (e) {
+      error(e);
+    }
+  }, []);
+}
+
+/**
+ * Helper to capture list of plugins from CLI
+ */
+
+function collect(val, memo) {
+  val.split(',').forEach(function (val) {
+    memo.push(val);
+  });
+
+  return memo;
+}
