@@ -1,4 +1,4 @@
-# duo-test
+# duo-tester
 
 > A test server for developers using duo
 
