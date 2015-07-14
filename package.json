@@ -1,6 +1,6 @@
 {
   "name": "duo-tester",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Automated testing tool for developers using duo",
   "repository": "dominicbarnes/duo-tester",
   "bin": "bin/duo-test",
