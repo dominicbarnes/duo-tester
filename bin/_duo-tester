@@ -14,7 +14,7 @@ var resolve = require('path').resolve;
  * Command Line Interface.
  */
 
-var program = new Command('duo-test')
+var program = new Command('duo-tester')
   .version(pkg.version)
   .option('-r, --root <dir>', 'set root directory', process.cwd())
   .option('-u, --use <plugin>', 'use transform plugin(s)', collect, []);

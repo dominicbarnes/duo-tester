@@ -14,10 +14,10 @@ var resolve = require('path').resolve;
 var args = process.argv.slice(2);
 
 /**
- * Inject the _duo-test script.
+ * Inject the _duo-tester script.
  */
 
-args.unshift(resolve(__dirname, '_duo-test'));
+args.unshift(resolve(__dirname, '_duo-tester'));
 
 /**
  * Add the necessary node flag.

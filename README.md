@@ -6,7 +6,7 @@
 
 ```
 
-  Usage: duo-test [options] [command]
+  Usage: duo-tester [options] [command]
 
 
   Commands:
@@ -27,11 +27,11 @@
 
 ```sh
 # starts a web server with scripts at test/*.js
-$ duo-test browser
+$ duo-tester browser
 
 # uses mocha-phantomjs to run tests using test/*.js
-$ duo-test phantomjs
+$ duo-tester phantomjs
 
 # use alternate test files (both CSS and JS for example)
-$ duo-test browser test/*.js test/*.css
+$ duo-tester browser test/*.js test/*.css
 ```
