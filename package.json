@@ -6,7 +6,7 @@
   "bin": "bin/duo-tester",
   "dependencies": {
     "commander": "^2.8.0",
-    "duo-serve": "^0.11.0",
+    "duo-serve": "^0.12.0",
     "glob": "^5.0.5",
     "has-generators": "^1.0.1",
     "mocha-phantomjs": "^3.5.3",
