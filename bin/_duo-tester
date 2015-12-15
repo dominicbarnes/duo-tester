@@ -16,6 +16,7 @@ var resolve = require('path').resolve;
 
 var program = new Command('duo-tester')
   .version(pkg.version)
+  .option('-p, --port <num>', 'set the port number', 3000)
   .option('-r, --root <dir>', 'set root directory', process.cwd())
   .option('-u, --use <plugin>', 'use transform plugin(s)', collect, []);
 

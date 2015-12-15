@@ -18,6 +18,7 @@
 
     -h, --help          output usage information
     -V, --version       output the version number
+    -p, --port <num>    set the port number
     -r, --root <dir>    set root directory
     -u, --use <plugin>  use transform plugin(s)
 
