@@ -12,7 +12,15 @@
     "mocha-phantomjs": "^3.5.3",
     "win-spawn": "^2.0.0"
   },
+  "devDependencies": {
+    "@dominicbarnes/eslint-config": "*",
+    "@dominicbarnes/eslint-config-node": "*",
+    "@dominicbarnes/eslint-config-test": "*",
+    "eslint": "^1.10.3",
+    "eslint-plugin-require-path-exists": "^1.0.25"
+  },
   "scripts": {
+    "lint": "eslint bin lib",
     "hooks": "cp scripts/hooks/* .git/hooks/"
   }
 }

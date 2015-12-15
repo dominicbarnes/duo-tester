@@ -61,15 +61,17 @@ if (!program.args.length) program.help();
  * @param {Function} runner
  */
 
-function run(runner, files, options) {
-  var runner = require('../lib/' + runner);
+function run(id, files, options) {
+  var runner = require('../lib/' + id);
   var root = options.parent.root;
   var entries = getEntries(files, root);
   var plugins = getPlugins(options.parent.use, root);
+  var port = options.parent.port;
 
   runner(entries, {
     root: root,
-    plugins: plugins
+    plugins: plugins,
+    port: port
   });
 }
 
