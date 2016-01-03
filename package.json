@@ -6,10 +6,14 @@
   "bin": "bin/duo-tester",
   "dependencies": {
     "commander": "^2.8.0",
+    "duo": "^0.15.3",
     "duo-serve": "^0.12.0",
+    "electron-mocha": "^0.7.0",
+    "electron-prebuilt": "^0.36.2",
     "glob": "^5.0.5",
     "has-generators": "^1.0.1",
     "mocha-phantomjs": "^3.5.3",
+    "os-tmpdir": "^1.0.1",
     "win-spawn": "^2.0.0"
   },
   "devDependencies": {
