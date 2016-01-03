@@ -33,7 +33,6 @@ program
     run('browser', files, options);
   });
 
-
 /**
  * Perform headless testing using mocha-phantomjs.
  *
@@ -45,6 +44,19 @@ program
   .description('run headless tests using mocha-phantomjs')
   .action(function (files, options) {
     run('phantom', files, options);
+  });
+
+/**
+ * Perform headless testing using electron-mocha.
+ *
+ * @see ../lib/electron.js
+ */
+
+program
+  .command('electron [files...]')
+  .description('run headless tests using electron-mocha')
+  .action(function (files, options) {
+    run('electron', files, options);
   });
 
 // parse the CLI arguments
